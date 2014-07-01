@@ -1,0 +1,12 @@
+*
+!**/
+!*.*
+nimcache/
+
+*.o
+!/icons/*.o
+*.exe
+*.so
+*.dylib
+*.zip
+*.iss
