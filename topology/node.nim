@@ -1,4 +1,4 @@
 type
-  TNode = object of TObject
+  Node = object of TObject
     id*: int
     
