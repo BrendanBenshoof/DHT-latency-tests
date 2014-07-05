@@ -27,6 +27,22 @@ def create_chord_graph(nodes):
             overlay.add_edge(n,finger)
     return overlay, hashids
 
+def create_chord_graph(nodes):
+    hashids = {}
+    for n in nodes:
+        hashids[n] = random.randint(0,maxhash-1)
+    overlay = networkx.DiGraph()
+    overlay.add_nodes_from(nodes)
+    for n in nodes:
+        myhash = hashids[n]
+        #setup fingers for each node
+        for i in range(0,hash_space):
+            ideal_finger = (myhash + 2**i) % maxhash
+            finger = min(nodes,key=lambda x: hash_dist(ideal_finger,hashids[x]))
+            print finger,hashids[finger]
+            overlay.add_edge(n,finger)
+    return overlay, hashids
+
 def get_real_hops(real_graph,overlay,A,B):
     path = networkx.shortest_path(overlay,A,B)
     steps = []
@@ -57,7 +73,7 @@ if __name__ == "__main__":
 
         hoplist.append(get_real_hops(real_graph,chord_overlay,x,y))
 
-    plt.hist(hoplist)
+    plt.hist(hoplist,bins=range(1,21))
     plt.title("Latency Distribution")
     plt.xlabel("Hops")
     plt.ylabel("Frequency")

@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
         hoplist.append(hops(underlay,x,y))
 
-    plt.hist(hoplist)
+    plt.hist(hoplist,bins=range(1,21))
     plt.title("Latency Distribution")
     plt.xlabel("Hops")
     plt.ylabel("Frequency")
