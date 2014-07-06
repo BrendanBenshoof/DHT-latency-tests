@@ -64,6 +64,6 @@ var nodes : seq[Vector] = @[]
 for i in 0..20:
   nodes.add( randomUnitVector()*random(50.0) )
 for i in 0..20:
-  var center : Vector = nodes[i]
+  var center = nodes[i]
   var others : seq[Vector] = skip(nodes,i)
   echo(approxVoronoiVolume(center,others))
